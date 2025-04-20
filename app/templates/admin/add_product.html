@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container py-5">
+    <h1 class="text-center mb-5">Добавить товар</h1>
+
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-body p-5">
+                    <form method="POST" action="{{ url_for('admin.add_product') }}" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Название товара</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Описание</label>
+                            <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="price" class="form-label">Цена</label>
+                            <input type="number" step="0.01" class="form-control" id="price" name="price" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="category" class="form-label">Категория</label>
+                            <select class="form-select" id="category" name="category" required>
+                                <option value="одежда">Одежда</option>
+                                <option value="аксессуары">Аксессуары</option>
+                                <option value="косметика">Косметика</option>
+                                <option value="украшения">Украшения</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="image" class="form-label">Изображение</label>
+                            <input class="form-control" type="file" id="image" name="image" required>
+                        </div>
+                        <button type="submit" class="btn btn-pink w-100">Добавить товар</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

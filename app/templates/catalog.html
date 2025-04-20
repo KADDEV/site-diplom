@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container py-5">
+    <h1 class="text-center mb-5">Наш каталог</h1>
+
+    <div class="text-center mb-4">
+        <a href="{{ url_for('views.catalog') }}" class="btn category-btn {% if not request.args.get('category') %}active{% endif %}">Все товары</a>
+        <a href="{{ url_for('views.catalog') }}?category=одежда" class="btn category-btn {% if request.args.get('category') == 'одежда' %}active{% endif %}">Одежда</a>
+        <a href="{{ url_for('views.catalog') }}?category=аксессуары" class="btn category-btn {% if request.args.get('category') == 'аксессуары' %}active{% endif %}">Аксессуары</a>
+        <a href="{{ url_for('views.catalog') }}?category=обувь" class="btn category-btn {% if request.args.get('category') == 'косметика' %}active{% endif %}">Обувь</a>
+        <a href="{{ url_for('views.catalog') }}?category=украшения" class="btn category-btn {% if request.args.get('category') == 'украшения' %}active{% endif %}">Украшения</a>
+    </div>
+
+    <div class="row">
+        {% for product in products %}
+        <div class="col-md-4 mb-4">
+            <div class="card product-card">
+                <img src="{{ url_for('static', filename='images/products/' + product.image) }}" class="card-img-top product-img" alt="{{ product.name }}">
+                <div class="card-body">
+                    <h5 class="card-title product-title">{{ product.name }}</h5>
+                    <p class="card-text">{{ product.description[:100] }}...</p>
+                    <p class="product-price">{{ product.price }} руб.</p>
+                    <a href="{{ url_for('cart.add_to_cart', product_id=product.id) }}" class="btn btn-pink">В корзину</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

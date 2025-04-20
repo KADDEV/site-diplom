@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="hero-section">
+    <div class="container">
+        <h1 class="hero-title">Laurel</h1>
+        <p class="lead">Эксклюзивные товары для стильных женщин</p>
+        <a href="{{ url_for('views.catalog') }}" class="btn btn-pink btn-lg mt-3">В каталог</a>
+    </div>
+</div>
+
+<div class="container py-5">
+    <h2 class="text-center mb-5">Новые поступления</h2>
+    <div class="row">
+        {% for product in featured_products %}
+        <div class="col-md-3">
+            <div class="card product-card">
+                <img src="{{ url_for('static', filename='images/products/' + product.image) }}" class="card-img-top product-img" alt="{{ product.name }}">
+                <div class="card-body">
+                    <h5 class="card-title product-title">{{ product.name }}</h5>
+                    <p class="card-text">{{ product.price }} руб.</p>
+                    <a href="{{ url_for('cart.add_to_cart', product_id=product.id) }}" class="btn btn-pink">В корзину</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
